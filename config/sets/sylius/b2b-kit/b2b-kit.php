@@ -65,6 +65,14 @@ return static function (RectorConfig $rectorConfig): void {
     );
 
     $rectorConfig->ruleWithConfigurationComposerVersionBound(AddInterfaceToClassExtendingTypeRector::class, [
+        'Sylius\Component\Core\Model\Payment' => ['Sylius\B2BKit\TradeCredit\Entity\PaymentInterface'],
+    ], 'sylius/b2b-kit', '>=4.0 <5.0');
+
+    $rectorConfig->ruleWithConfigurationComposerVersionBound(AddTraitToClassExtendingTypeRector::class, [
+        'Sylius\Component\Core\Model\Payment' => ['Sylius\B2BKit\TradeCredit\Entity\TradeCreditPaymentTrait'],
+    ], 'sylius/b2b-kit', '>=4.0 <5.0');
+
+    $rectorConfig->ruleWithConfigurationComposerVersionBound(AddInterfaceToClassExtendingTypeRector::class, [
         'Sylius\Bundle\CoreBundle\Doctrine\ORM\AddressRepository' => [
             'Sylius\B2BKit\Organization\Repository\AddressRepositoryInterface',
         ],
