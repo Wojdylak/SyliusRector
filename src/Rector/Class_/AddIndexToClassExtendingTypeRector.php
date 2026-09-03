@@ -8,6 +8,7 @@ use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Attribute;
 use PhpParser\Node\AttributeGroup;
+use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Identifier;
@@ -129,15 +130,32 @@ CODE_SAMPLE
 
     private function matchesIndexName(Attribute $attribute, string $indexName): bool
     {
+        $nameArg = $this->resolveNameArg($attribute);
+
+        return $nameArg instanceof String_ && $nameArg->value === $indexName;
+    }
+
+    /**
+     * Doctrine\ORM\Mapping\Index takes $name as its first parameter, so an existing index may
+     * spell the name either as "name:" or positionally.
+     */
+    private function resolveNameArg(Attribute $attribute): ?Expr
+    {
+        $firstPositionalArg = null;
+
         foreach ($attribute->args as $arg) {
-            if (! $arg->name instanceof Identifier || $arg->name->toString() !== 'name') {
+            if ($arg->name instanceof Identifier) {
+                if ($arg->name->toString() === 'name') {
+                    return $arg->value;
+                }
+
                 continue;
             }
 
-            return $arg->value instanceof String_ && $arg->value->value === $indexName;
+            $firstPositionalArg ??= $arg->value;
         }
 
-        return false;
+        return $firstPositionalArg;
     }
 
     private function addIndex(Class_ $node, Index $index): void
