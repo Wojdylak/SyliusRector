@@ -8,8 +8,10 @@ use Sylius\SyliusRector\Rector\Dto\Index;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->ruleWithConfiguration(AddIndexToClassExtendingTypeRector::class, [
-        'Sylius\Component\Core\Model\Payment' => [
-            new Index('idx_payment_credit_approval_state', ['credit_approval_state']),
+        'Sylius\Component\Core\Model\Order' => [new Index('idx_order_number', ['number'])],
+        'Sylius\Component\Core\Model\ProductVariant' => [
+            new Index('idx_product_variant_code', ['code']),
+            new Index('idx_product_variant_position', ['position']),
         ],
     ]);
 };

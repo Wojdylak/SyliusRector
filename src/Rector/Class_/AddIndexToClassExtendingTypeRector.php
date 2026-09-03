@@ -45,23 +45,23 @@ final class AddIndexToClassExtendingTypeRector extends AbstractRector implements
                 new CodeSample(
                     <<<'CODE_SAMPLE'
 use Doctrine\ORM\Mapping as ORM;
-use Sylius\Component\Core\Model\Payment as BasePayment;
+use Sylius\Component\Core\Model\Order as BaseOrder;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'sylius_payment')]
-class Payment extends BasePayment
+#[ORM\Table(name: 'sylius_order')]
+class Order extends BaseOrder
 {
 }
 CODE_SAMPLE
                     ,
                     <<<'CODE_SAMPLE'
 use Doctrine\ORM\Mapping as ORM;
-use Sylius\Component\Core\Model\Payment as BasePayment;
+use Sylius\Component\Core\Model\Order as BaseOrder;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'sylius_payment')]
-#[ORM\Index(name: 'idx_payment_credit_approval_state', columns: ['credit_approval_state'])]
-class Payment extends BasePayment
+#[ORM\Table(name: 'sylius_order')]
+#[ORM\Index(name: 'idx_order_number', columns: ['number'])]
+class Order extends BaseOrder
 {
 }
 CODE_SAMPLE
