@@ -7,15 +7,19 @@ namespace Sylius\SyliusRector\Tests\Set\LiveOnePageCheckoutPlugin;
 use Iterator;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 
-final class LiveOnePageCheckoutPlugin01Test extends AbstractRectorTestCase
+final class LiveOnePageCheckoutPluginTest extends AbstractRectorTestCase
 {
-    /** @dataProvider provideData() */
+    /**
+     * @dataProvider provideData()
+     */
     public function test(string $file): void
     {
         $this->doTestFile($file);
     }
 
-    /** @return Iterator<string> */
+    /**
+     * @return Iterator<string>
+     */
     public function provideData(): Iterator
     {
         return self::yieldFilesFromDirectory(__DIR__ . '/Fixture');
@@ -23,6 +27,6 @@ final class LiveOnePageCheckoutPlugin01Test extends AbstractRectorTestCase
 
     public function provideConfigFilePath(): string
     {
-        return __DIR__ . '/config/live_one_page_checkout_plugin_0_1.php';
+        return __DIR__ . '/config/live_one_page_checkout_plugin.php';
     }
 }

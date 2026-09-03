@@ -14,13 +14,11 @@ class Channel extends BaseChannel
 
 namespace Sylius\SyliusRector\Tests\Set\LiveOnePageCheckoutPlugin\Fixture;
 
-use Sylius\LiveOnePageCheckoutPlugin\Entity\ChannelInterface;
-use Sylius\LiveOnePageCheckoutPlugin\Entity\ChannelOnePageCheckoutAwareTrait;
 use Sylius\Component\Core\Model\Channel as BaseChannel;
 
-class Channel extends BaseChannel implements ChannelInterface
+class Channel extends BaseChannel implements \Sylius\LiveOnePageCheckoutPlugin\Entity\ChannelOnePageCheckoutAwareInterface
 {
-    use ChannelOnePageCheckoutAwareTrait;
+    use \Sylius\LiveOnePageCheckoutPlugin\Entity\ChannelOnePageCheckoutAwareTrait;
 }
 
 ?>
