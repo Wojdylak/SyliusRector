@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Sylius\SyliusRector\SetProvider\SyliusSetProvider;
 
 return RectorConfig::configure()
-    ->withSetProviders(SyliusSetProvider::class)
+    ->withSets([
+        __DIR__ . '/sets/bitbag/elasticsearch-plugin/elasticsearch-plugin.php',
+        __DIR__ . '/sets/sylius/b2b-kit/b2b-kit.php',
+        __DIR__ . '/sets/sylius/product-configuration-plugin/product-configuration-plugin.php',
+    ])
     ->withImportNames()
     ->withComposerBased(symfony: true)
 ;
